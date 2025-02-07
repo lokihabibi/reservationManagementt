@@ -1,0 +1,201 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>Manager Dashboard</h2>
+  </div>
+
+  <!-- Managed Terrains Section -->
+  <section class="dashboard-section">
+    <h3>Managed Terrains</h3>
+    <div *ngIf="loading.terrains" class="loading">Loading terrains...</div>
+    <div *ngIf="error.terrains" class="error-message">{{ error.terrains }}</div>
+    <div *ngIf="!loading.terrains && !error.terrains" class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Price/Hour</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let terrain of managedTerrains">
+            <td>{{terrain.id_terrain || 'N/A'}}</td>
+            <td>{{terrain.name || 'N/A'}}</td>
+            <td>{{terrain.location || 'N/A'}}</td>
+            <td class="description-cell">{{terrain.desc_terrain || 'No description available'}}</td>
+            <td>{{terrain.prix_heur ? (terrain.prix_heur | number:'1.2-2') + ' DT' : 'N/A'}}</td>
+            <td>
+              <span class="status-badge" 
+                    [ngClass]="{
+                      'available': terrain.availability === 'available',
+                      'maintenance': terrain.availability === 'maintenance',
+                      'unavailable': terrain.availability === 'unavailable'
+                    }">
+                {{terrain.availability}}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <select 
+                  [ngModel]="terrain.availability"
+                  (ngModelChange)="updateTerrainStatus(terrain.id_terrain, $event)"
+                  class="status-select">
+                  <option *ngFor="let status of terrainAvailabilityOptions" [value]="status">
+                    {{status | titlecase}}
+                  </option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="managedTerrains.length === 0" class="no-data">No terrains found</div>
+    </div>
+  </section>
+
+  <!-- Managed Equipment Section -->
+  <section class="dashboard-section">
+    <h3>Managed Equipment</h3>
+    <div *ngIf="loading.equipments" class="loading">Loading equipment...</div>
+    <div *ngIf="error.equipments" class="error-message">{{ error.equipments }}</div>
+    <div *ngIf="!loading.equipments && !error.equipments" class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipment of managedEquipments">
+            <td>{{equipment.id_equipment || 'N/A'}}</td>
+            <td>{{equipment.nom_equipment || 'N/A'}}</td>
+            <td>{{equipment.location || 'N/A'}}</td>
+            <td class="description-cell">{{equipment.desc_equipment || 'No description available'}}</td>
+            <td>{{equipment.prix ? (equipment.prix | number:'1.2-2') + ' DT' : 'N/A'}}</td>
+            <td>
+              <span class="status-badge" 
+                    [ngClass]="{
+                      'available': equipment.availability === 'available',
+                      'maintenance': equipment.availability === 'maintenance',
+                      'unavailable': equipment.availability === 'unavailable'
+                    }">
+                {{equipment.availability}}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <select 
+                  [ngModel]="equipment.availability"
+                  (ngModelChange)="updateEquipmentStatus(equipment.id_equipment, $event)"
+                  class="status-select">
+                  <option *ngFor="let status of equipmentAvailabilityOptions" [value]="status">
+                    {{status | titlecase}}
+                  </option>
+                </select>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="managedEquipments.length === 0" class="no-data">No equipment found</div>
+    </div>
+  </section>
+
+  <!-- Pending Reservations Section -->
+  <section class="dashboard-section">
+    <h3>Pending Reservations</h3>
+    <div *ngIf="loading.reservations" class="loading">Loading reservations...</div>
+    <div *ngIf="error.reservations" class="error-message">{{ error.reservations }}</div>
+    <div *ngIf="!loading.reservations && !error.reservations" class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Time Slot</th>
+            <th>Terrain</th>
+            <th>Equipment</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of reservations">
+            <td>{{reservation.idReservation}}</td>
+            <td>{{reservation.userName}}</td>
+            <td>{{reservation.dateRes | date:'MM/dd/yy'}}</td>
+            <td>{{reservation.timeSlot}}</td>
+            <td>{{reservation.terrainName}}</td>
+            <td>{{reservation.equipmentName}}</td>
+            <td>
+              <span class="status-badge" 
+                    [ngClass]="{
+                      'pending': reservation.status === 'pending',
+                      'approved': reservation.status === 'approved',
+                      'rejected': reservation.status === 'rejected'
+                    }">
+                {{reservation.status}}
+              </span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="success-btn" 
+                        (click)="handleReservation(reservation.idReservation, 'approve')"
+                        [disabled]="reservation.status !== 'pending'">
+                  Approve
+                </button>
+                <button class="warning-btn" 
+                        (click)="handleReservation(reservation.idReservation, 'reject')"
+                        [disabled]="reservation.status !== 'pending'">
+                  Reject
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="reservations.length === 0" class="no-data">No pending reservations found</div>
+    </div>
+  </section>
+
+  <!-- Reports Section -->
+  <section class="dashboard-section">
+    <h3>Reports</h3>
+    <div *ngIf="loading.rapports" class="loading">Loading reports...</div>
+    <div *ngIf="error.rapports" class="error-message">{{ error.rapports }}</div>
+    <div *ngIf="!loading.rapports && !error.rapports" class="data-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Terrain</th>
+            <th>Equipment</th>
+            <th>User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rapport of rapports">
+            <td>{{rapport.dateRapport | date:'MM/dd/yy'}}</td>
+            <td>{{rapport.description}}</td>
+            <td>{{rapport.terrainName || 'N/A'}}</td>
+            <td>{{rapport.equipmentName || 'N/A'}}</td>
+            <td>{{rapport.userName}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="rapports.length === 0" class="no-data">No reports found</div>
+    </div>
+  </section>
+</div>

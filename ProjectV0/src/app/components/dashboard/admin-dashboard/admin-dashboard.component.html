@@ -1,0 +1,167 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+  </div>
+
+  <mat-tab-group class="tab-group" animationDuration="0ms" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Users">
+      <div class="tab-content">
+        <div class="action-bar">
+          <button mat-raised-button color="primary" (click)="openUserDialog()">
+            <mat-icon>add</mat-icon>
+            Add User
+          </button>
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Filter Users</mat-label>
+            <input matInput (keyup)="applyFilter($event, 'users')" placeholder="Search users...">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <table mat-table [dataSource]="filteredUsers" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let user">{{user.prenomUser}} {{user.nomUser}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let user">{{user.emailUser}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef>Role</th>
+            <td mat-cell *matCellDef="let user">
+              <span class="role-badge" [class.manager-role]="user.role === 'manager'" [class.client-role]="user.role === 'client'">
+                {{user.role}}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let user">
+              <button mat-icon-button color="primary" (click)="openUserDialog(user)" matTooltip="Edit User">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteUser(user)" matTooltip="Delete User">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="['name', 'email', 'role', 'actions']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['name', 'email', 'role', 'actions'];"></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Terrains">
+      <div class="tab-content">
+        <div class="action-bar">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search Terrains</mat-label>
+            <input matInput (keyup)="applyFilter($event, 'terrains')" placeholder="Search by name or location">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="openTerrainDialog()" class="add-button">
+            <mat-icon>add</mat-icon>
+            Add Terrain
+          </button>
+        </div>
+
+        <div class="item-grid">
+          <mat-card *ngFor="let terrain of filteredTerrains" class="item-card">
+            <mat-card-header>
+              <div mat-card-avatar class="item-avatar">
+                <mat-icon>sports</mat-icon>
+              </div>
+              <mat-card-title>{{terrain.name}}</mat-card-title>
+              <mat-card-subtitle>{{terrain.location}}</mat-card-subtitle>
+            </mat-card-header>
+            
+            <div class="image-container">
+              <img mat-card-image [src]="terrain.image_terrain || 'assets/default-terrain.jpg'" [alt]="terrain.name">
+            </div>
+            
+            <mat-card-content>
+              <div class="item-details">
+                <div class="price-container">
+                  <p class="price"><strong>{{terrain.prix_heur}} DT</strong></p>
+                  <p class="price-label">per hour</p>
+                </div>
+                <span [class]="'status-badge ' + (terrain.availability === 'available' ? 'status-available' : 'status-unavailable')">
+                  {{terrain.availability === 'available' ? 'Available' : 'Unavailable'}}
+                </span>
+              </div>
+              <p class="description">{{terrain.desc_terrain || 'No description available'}}</p>
+            </mat-card-content>
+            
+            <mat-card-actions align="end">
+              <button mat-icon-button color="primary" (click)="openTerrainDialog(terrain)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteTerrain(terrain)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Equipment">
+      <div class="tab-content">
+        <div class="action-bar">
+          <mat-form-field appearance="outline" class="search-field">
+            <mat-label>Search Equipment</mat-label>
+            <input matInput (keyup)="applyFilter($event, 'equipments')" placeholder="Search by name or description">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="openEquipmentDialog()" class="add-button">
+            <mat-icon>add</mat-icon>
+            Add Equipment
+          </button>
+        </div>
+
+        <div class="item-grid">
+          <mat-card *ngFor="let equipment of filteredEquipments" class="item-card">
+            <mat-card-header>
+              <div mat-card-avatar class="item-avatar">
+                <mat-icon>fitness_center</mat-icon>
+              </div>
+              <mat-card-title>{{equipment.nom_equipment}}</mat-card-title>
+              <mat-card-subtitle>Location: Main Storage</mat-card-subtitle>
+            </mat-card-header>
+
+            <div class="image-container">
+              <img mat-card-image [src]="equipment.image_equip || 'assets/default-equipment.jpg'" [alt]="equipment.nom_equipment">
+            </div>
+
+            <mat-card-content>
+              <div class="item-details">
+                <div class="price-container">
+                  <p class="price"><strong>{{equipment.prix}} DT</strong></p>
+                  <p class="price-label">per day</p>
+                </div>
+                <span [class]="'status-badge ' + (equipment.availability === 'available' ? 'status-available' : 'status-unavailable')">
+                  {{equipment.availability === 'available' ? 'Available' : 'Unavailable'}}
+                </span>
+              </div>
+              <p class="description">{{equipment.desc_equipment || 'No description available'}}</p>
+            </mat-card-content>
+
+            <mat-card-actions align="end">
+              <button mat-icon-button color="primary" (click)="openEquipmentDialog(equipment)" matTooltip="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="deleteEquipment(equipment)" matTooltip="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

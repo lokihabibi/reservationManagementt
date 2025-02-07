@@ -1,0 +1,266 @@
+.terrain-section {
+  padding: 120px 0;
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header h2 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #1565C0;
+  position: relative;
+  margin: 0;
+  line-height: 1;
+  display: inline-block;
+  animation: titleSlide 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.section-header h2::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  right: -10px;
+  top: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #1565C0, #42A5F5);
+  z-index: -1;
+  opacity: 0.1;
+  border-radius: 10px;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: bgSlide 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.5s;
+}
+
+.section-header h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  width: 100px;
+  height: 6px;
+  background: currentColor;
+  transform: translateX(-50%) scaleX(0);
+  animation: lineGrow 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.8s;
+}
+
+.terrain-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.terrain-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  border: 1px solid #eee;
+}
+
+.terrain-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.terrain-card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.price {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #1565C0;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.price span {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-left: 3px;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border-radius: 15px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.status.available {
+  background: #2E7D32;
+}
+
+.status.maintenance {
+  background: #F57C00;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h3 {
+  font-size: 1.2rem;
+  color: #1565C0;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.location i {
+  color: #1565C0;
+  font-size: 1rem;
+}
+
+.description {
+  color: #666;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.book-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #1565C0;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.book-btn:hover {
+  background: #0D47A1;
+}
+
+.book-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@keyframes titleSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bgSlide {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes lineGrow {
+  0% {
+    transform: translateX(-50%) scaleX(0);
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 3rem;
+  }
+
+  .terrain-card {
+    width: 220px;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+
+  .price {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+
+  .terrain-card {
+    width: 200px;
+  }
+
+  .card-image {
+    height: 140px;
+  }
+
+  .price {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+
+}

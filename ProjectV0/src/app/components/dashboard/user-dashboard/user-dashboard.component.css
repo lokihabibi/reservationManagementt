@@ -1,0 +1,12 @@
+.dashboard-container {
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  background-color: #f3f4f6;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 1rem;
+  }
+}

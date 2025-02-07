@@ -1,0 +1,196 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #1e293b;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1rem;
+}
+
+.reservations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+  padding: 0.5rem;
+}
+
+.reservation-card {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+  border: 1px solid #e5e7eb;
+}
+
+.reservation-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-subtitle {
+  color: #64748b;
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.card-subtitle span {
+  display: block;
+}
+
+.card-content {
+  margin-bottom: 1.5rem;
+}
+
+.card-content p {
+  margin: 0.75rem 0;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.card-content p:last-child {
+  border-bottom: none;
+}
+
+.card-content p strong {
+  color: #334155;
+  font-weight: 500;
+}
+
+.status-pending {
+  color: #0369a1;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.status-confirmed {
+  color: #15803d;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.status-cancelled {
+  color: #b91c1c;
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background-color: #b91c1c;
+}
+
+.cancel-button:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.cancel-button i {
+  font-size: 0.875rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.empty-state p {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .reservations-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .card-content p {
+    font-size: 0.875rem;
+  }
+}

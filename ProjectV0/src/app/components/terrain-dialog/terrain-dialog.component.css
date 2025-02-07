@@ -1,0 +1,10 @@
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.mat-dialog-content {
+  min-width: 400px;
+}
+textarea {
+  min-height: 100px;
+}

@@ -1,0 +1,123 @@
+<div class="signup-container">
+  <div class="signup-box">
+    <h2>Create Account</h2>
+    <p class="subtitle">Join us and start renting sports equipment today!</p>
+
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenomUser">
+            <i class="fas fa-user"></i>
+            First Name
+          </label>
+          <input 
+            type="text" 
+            id="prenomUser"
+            formControlName="prenomUser"
+            [class.error]="signupForm.get('prenomUser')?.invalid && signupForm.get('prenomUser')?.touched"
+          >
+          <span class="error-message" *ngIf="signupForm.get('prenomUser')?.invalid && signupForm.get('prenomUser')?.touched">
+            {{ getErrorMessage('prenomUser') }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="nomUser">
+            <i class="fas fa-user"></i>
+            Last Name
+          </label>
+          <input 
+            type="text" 
+            id="nomUser"
+            formControlName="nomUser"
+            [class.error]="signupForm.get('nomUser')?.invalid && signupForm.get('nomUser')?.touched"
+          >
+          <span class="error-message" *ngIf="signupForm.get('nomUser')?.invalid && signupForm.get('nomUser')?.touched">
+            {{ getErrorMessage('nomUser') }}
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="emailUser">
+          <i class="fas fa-envelope"></i>
+          Email
+        </label>
+        <input 
+          type="email" 
+          id="emailUser"
+          formControlName="emailUser"
+          [class.error]="signupForm.get('emailUser')?.invalid && signupForm.get('emailUser')?.touched"
+        >
+        <span class="error-message" *ngIf="signupForm.get('emailUser')?.invalid && signupForm.get('emailUser')?.touched">
+          {{ getErrorMessage('emailUser') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="adresseUser">
+          <i class="fas fa-map-marker-alt"></i>
+          Address
+        </label>
+        <input 
+          type="text" 
+          id="adresseUser"
+          formControlName="adresseUser"
+          [class.error]="signupForm.get('adresseUser')?.invalid && signupForm.get('adresseUser')?.touched"
+        >
+        <span class="error-message" *ngIf="signupForm.get('adresseUser')?.invalid && signupForm.get('adresseUser')?.touched">
+          {{ getErrorMessage('adresseUser') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="telUser">
+          <i class="fas fa-phone"></i>
+          Phone Number
+        </label>
+        <input 
+          type="tel" 
+          id="telUser"
+          formControlName="telUser"
+          [class.error]="signupForm.get('telUser')?.invalid && signupForm.get('telUser')?.touched"
+        >
+        <span class="error-message" *ngIf="signupForm.get('telUser')?.invalid && signupForm.get('telUser')?.touched">
+          {{ getErrorMessage('telUser') }}
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordUser">
+          <i class="fas fa-lock"></i>
+          Password
+        </label>
+        <div class="password-input">
+          <input 
+            [type]="showPassword ? 'text' : 'password'"
+            id="passwordUser"
+            formControlName="passwordUser"
+            [class.error]="signupForm.get('passwordUser')?.invalid && signupForm.get('passwordUser')?.touched"
+          >
+          <button type="button" class="toggle-password" (click)="togglePassword()">
+            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+        <span class="error-message" *ngIf="signupForm.get('passwordUser')?.invalid && signupForm.get('passwordUser')?.touched">
+          {{ getErrorMessage('passwordUser') }}
+        </span>
+      </div>
+
+      <button type="submit" class="signup-button" [disabled]="signupForm.invalid || isLoading">
+        <span *ngIf="!isLoading">Create Account</span>
+        <span *ngIf="isLoading">
+          <i class="fas fa-spinner fa-spin"></i>
+          Creating account...
+        </span>
+      </button>
+
+      <p class="login-link">
+        Already have an account? <a routerLink="/login">Sign in</a>
+      </p>
+    </form>
+  </div>
+</div>

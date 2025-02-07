@@ -1,0 +1,27 @@
+<div class="terrain-card">
+  <div class="terrain-image">
+    <img [src]="terrain.image_terrain" [alt]="terrain.name">
+    <div class="terrain-price">{{terrain.prix_heur}}€<span>/hour</span></div>
+  </div>
+  <div class="terrain-content">
+    <h3 class="terrain-name">{{terrain.name}}</h3>
+    <div class="terrain-location">
+      <i class="fas fa-map-marker-alt"></i>
+      {{terrain.location}}
+    </div>
+    <p class="terrain-description">{{terrain.desc_terrain}}</p>
+    <div class="terrain-footer">
+      <span class="availability-badge" [class.available]="terrain.availability === 'available'">
+        {{terrain.availability}}
+      </span>
+      <button class="book-button" (click)="openReservationForm()">
+        <i class="fas fa-calendar-plus"></i>
+        Reserve
+      </button>
+      <button class="rapport-button" (click)="openRapportDialog()">
+        <i class="fas fa-file-alt"></i>
+        Rapport
+      </button>
+    </div>
+  </div>
+</div>

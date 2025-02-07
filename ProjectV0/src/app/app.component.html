@@ -1,0 +1,12 @@
+
+
+<div class="app-container">
+    <app-header></app-header>
+    <main class="main-content">
+        <router-outlet></router-outlet>
+    </main>
+    <app-footer></app-footer>
+    <button class="scroll-to-top" [class.visible]="showScrollButton" (click)="scrollToTop()" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+</div>

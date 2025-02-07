@@ -1,0 +1,42 @@
+<section class="equipment-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Discover Our Sports Equipment</h2>
+      <p class="section-subtitle">Find and rent high-quality sports equipment</p>
+    </div>
+
+    <div class="equipment-grid">
+      <div *ngFor="let equipment of equipments" class="equipment-card">
+        <div class="card-image">
+          <img [src]="equipment.image_equip" [alt]="equipment.nom_equipment">
+          <div class="price-tag">{{equipment.prix | number:'1.2-2'}}€<span>/h</span></div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">{{equipment.nom_equipment}}</h3>
+          <div class="card-category">
+            <i class="fas fa-tag"></i>
+            <span>Sports Equipment</span>
+          </div>
+          <div class="card-location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{equipment.location || 'Location not specified'}}</span>
+          </div>
+          <p class="card-description">{{equipment.desc_equipment}}</p>
+          <div class="card-footer">
+            <span class="status-badge" [class.available]="equipment.availability === 'available'" [class.maintenance]="equipment.availability === 'maintenance'">
+              {{ equipment.availability === 'available' ? 'Available' : (equipment.availability === 'maintenance' ? 'Maintenance' : 'Not Available') }}
+            </span>
+            <div class="action-buttons">
+              <button class="primary-button" (click)="openReservationForm(equipment)" [disabled]="equipment.availability !== 'available'">
+                <i class="fas fa-calendar-plus"></i> Reserve
+              </button>
+              <button class="secondary-button" (click)="openRapportDialog(equipment)">
+                <i class="fas fa-flag"></i> Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

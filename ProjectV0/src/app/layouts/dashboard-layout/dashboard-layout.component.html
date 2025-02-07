@@ -1,0 +1,16 @@
+<nav class="dashboard-nav">
+  <div class="nav-content">
+    <div class="nav-links">
+      <a routerLink="/user-dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/terrain" routerLinkActive="active">Terrains</a>
+      <a routerLink="/equipment" routerLinkActive="active">Equipment</a>
+      <a routerLink="/settings" routerLinkActive="active">Settings</a>
+      <span class="welcome-text">Welcome, {{userName}}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<main class="dashboard-content">
+  <ng-content></ng-content>
+</main>

@@ -1,0 +1,79 @@
+<div class="settings-container">
+  <h2>User Settings</h2>
+
+  <div *ngIf="errorMessage" class="message error">
+    {{errorMessage}}
+  </div>
+
+  <div *ngIf="successMessage" class="message success">
+    {{successMessage}}
+  </div>
+  
+  <div class="user-info">
+    <h3>Account Information</h3>
+    
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input 
+        type="text" 
+        id="firstName"
+        [(ngModel)]="editedUser.prenomUser" 
+        required
+        placeholder="Enter your first name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input 
+        type="text" 
+        id="lastName"
+        [(ngModel)]="editedUser.nomUser" 
+        required
+        placeholder="Enter your last name"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        type="email" 
+        id="email"
+        [(ngModel)]="editedUser.emailUser" 
+        required
+        placeholder="Enter your email"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number:</label>
+      <input 
+        type="tel" 
+        id="phone"
+        name="telUser"
+        [(ngModel)]="editedUser.telUser" 
+        class="form-control"
+        placeholder="Enter your phone number"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <textarea 
+        id="address"
+        [(ngModel)]="editedUser.adresseUser" 
+        placeholder="Enter your address"
+        rows="3"
+      ></textarea>
+    </div>
+
+    <div class="info-group">
+      <label>Role:</label>
+      <span class="role-display">{{userRole}}</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="save-btn" (click)="saveSettings()">Save Changes</button>
+  </div>
+</div>

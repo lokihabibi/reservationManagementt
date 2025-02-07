@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Make a Reservation</h2>
+    <div mat-dialog-content>
+      <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Date</mat-label>
+          <input matInput type="date" formControlName="date" [min]="today">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Time Slot</mat-label>
+          <mat-select formControlName="timeSlot">
+            <mat-option *ngFor="let slot of timeSlots" [value]="slot">
+              {{slot}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div>
+        
+        <div mat-dialog-actions>
+          <button mat-button type="button" (click)="dialogRef.close()">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!reservationForm.valid || isLoading">
+            {{ isLoading ? 'Making Reservation...' : 'Reserve' }}
+          </button>
+        </div>
+      </form>
+    </div>

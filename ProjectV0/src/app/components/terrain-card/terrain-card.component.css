@@ -1,0 +1,123 @@
+.terrain-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  position: relative;
+}
+
+.terrain-card:hover {
+  transform: translateY(-5px);
+}
+
+.terrain-image {
+  position: relative;
+  height: 200px;
+}
+
+.terrain-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.terrain-price {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.terrain-price span {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.terrain-content {
+  padding: 20px;
+}
+
+.terrain-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.terrain-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 10px;
+}
+
+.terrain-location i {
+  color: #4a90e2;
+}
+
+.terrain-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.terrain-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.availability-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: #ef4444;
+  color: white;
+}
+
+.availability-badge.available {
+  background-color: #10b981;
+}
+
+.book-button,
+.rapport-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.book-button {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.book-button:hover {
+  background-color: #357abd;
+}
+
+.rapport-button {
+  background-color: transparent;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+}
+
+.rapport-button:hover {
+  background-color: #f3f4f6;
+}
