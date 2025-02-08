@@ -26,11 +26,26 @@ public class User {
     @Column(name = "adresse_user")
     private String adresse_user;
 
-    @Column(name = "tel_user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Manager manager;
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Client client;
+
+    public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	@Column(name = "tel_user")
     private String tel_user;
 
     @Column(name = "role")
     private String role = "client"; 
+
     
     public User() {
         // Required by JPA
@@ -68,6 +83,17 @@ public class User {
     public String getPasswordUser() {
         return password_user;
     }
+    
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
+        if (manager != null) {
+            manager.setUser(this);
+        }
+    }
 
     public void setPasswordUser(String passwordUser) {
         this.password_user = passwordUser;
@@ -80,7 +106,6 @@ public class User {
     public void setEmailUser(String emailUser) {
         this.email_user = emailUser;
     }
-
     public String getNomUser() {
         return nom_user;
     }

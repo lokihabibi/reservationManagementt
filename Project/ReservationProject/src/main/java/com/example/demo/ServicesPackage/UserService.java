@@ -1,9 +1,10 @@
 package com.example.demo.ServicesPackage;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.ModelsPackage.Client;
+import com.example.demo.ModelsPackage.Manager;
 import com.example.demo.ModelsPackage.User;
 import com.example.demo.RepositoryPackage.UserRepository;
 
@@ -15,16 +16,37 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ManagerService managerService;
+    @Autowired
+    private ClientService clientService;
 
     // Create a new user
     public User createUser(User user) {
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        
+        // If the user is a manager, create a manager entity
+        if (user.getRole() != null && user.getRole().equals("manager")) {
+            Manager manager = managerService.createManager(savedUser);
+        }
+        if(user.getRole()!=null && user.getRole().equals("client"))
+        {
+        	Client client=clientService.createClient(savedUser);
+        }
+        
+        return savedUser;
     }
+
+    // Create a new user
+   /* public User createUser(User user) {
+        return userRepository.save(user);
+    }*/
 
     // Retrieve all users
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+   
 
     // Retrieve a user by ID
     public Optional<User> getUserById(Long id) {

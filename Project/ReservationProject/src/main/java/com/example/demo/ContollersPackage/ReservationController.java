@@ -7,7 +7,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.ModelsPackage.Reservation;
-import com.example.demo.ServicesPackage.NotificationService;
 import com.example.demo.ServicesPackage.ReservationService;
 
 import java.util.Date;
@@ -21,9 +20,6 @@ public class ReservationController {
 	
 	@Autowired
     private ReservationService reservationService;
-
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate; 
     
 
     @PostMapping
@@ -53,12 +49,7 @@ public class ReservationController {
 
     @PutMapping("/{id}/status")
     public Reservation updateReservationStatus(@PathVariable Integer id, @RequestParam String status) {
-    	   Reservation updatedReservation = reservationService.updateReservationStatus(id, status);
-           
-           // Notify users via WebSocket when status changes
-           messagingTemplate.convertAndSend("/topic/reservationStatusChanged", updatedReservation);
-           
-           return updatedReservation;        
+        return reservationService.updateReservationStatus(id, status);
     }
 
     @GetMapping("/check-availability")
