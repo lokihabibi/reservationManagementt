@@ -3,6 +3,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,10 +49,11 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}/status")
-    public Reservation updateReservationStatus(@PathVariable Integer id, @RequestParam String status) {
-        return reservationService.updateReservationStatus(id, status);
+    public ResponseEntity<Reservation> updateReservationStatus(@PathVariable Integer id, @RequestParam String status) {
+    	 Reservation reservation = reservationService.updateReservationStatus(id, status);
+    	    return ResponseEntity.ok(reservation);
     }
-
+    
     @GetMapping("/check-availability")
     public Map<String, Boolean> checkTimeSlotAvailability(@RequestParam Date date, @RequestParam String timeSlot) {
         boolean isAvailable = reservationService.isTimeSlotAvailable(date, timeSlot);

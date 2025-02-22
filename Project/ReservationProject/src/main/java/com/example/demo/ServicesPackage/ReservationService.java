@@ -17,6 +17,8 @@ public class ReservationService {
     
     @Autowired
     private ReservationRepository reservationRepository;
+    @Autowired
+    private EmailService emailService;
     
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -125,6 +127,33 @@ public class ReservationService {
     }
 
     public Reservation updateReservationStatus(Integer id, String status) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Reservation not found"));
+
+        reservation.setStatus(status);
+        reservationRepository.save(reservation);
+
+        // Get user email
+        String userEmail = jdbcTemplate.queryForObject(
+                "SELECT email_user FROM user WHERE id_user = ?", 
+                String.class, 
+                reservation.getUserId()
+        );
+
+        // Send email
+        if (userEmail != null) {
+            if ("approved".equals(status)) {
+                emailService.sendApprovalEmail(userEmail);
+            } else if ("rejected".equals(status)) {
+                emailService.sendRejectionEmail(userEmail);
+            }
+        }
+
+        return reservation;
+    }
+
+    
+  /*  public Reservation updateReservationStatus(Integer id, String status) {
         if (!isValidStatus(status)) {
             throw new IllegalArgumentException("Invalid status: " + status);
         }
@@ -134,7 +163,7 @@ public class ReservationService {
         }
         reservation.setStatus(status);
         return reservationRepository.save(reservation);
-    }
+    }*/
 
     private boolean isValidStatus(String status) {
         return status != null && List.of("pending", "approved", "rejected", "cancelled", "completed").contains(status);
