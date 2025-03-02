@@ -20,17 +20,17 @@ public class EquipmentService {
     public Equipment createEquipment(Equipment equipment) {
         return equipmentRepository.save(equipment);}
     
-    // Retrieve all equipment
+    // get all equipment
     public List<Equipment> getAllEquipments() {
         return equipmentRepository.findAll();
     }
 
-    // Retrieve equipment by manager ID
+    // get equipment by manager ID
     public List<Equipment> getEquipmentsByManagerId(Long managerId) {
         return equipmentRepository.findByManagerId(managerId);
     }
 
-    // Retrieve equipment by ID
+    // get equipment by ID
     public Optional<Equipment> getEquipmentById(Long id) {
         return equipmentRepository.findById(id);
     }

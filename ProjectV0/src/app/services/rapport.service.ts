@@ -23,4 +23,11 @@ export class RapportService {
   getRapportsByManager(managerId: number): Observable<Rapport[]> {
     return this.http.get<Rapport[]>(`${this.baseUrl}/manager/${managerId}`);
   }
+  getAllReports(): Observable<Rapport[]> {
+    return this.http.get<Rapport[]>(this.baseUrl);
+  }
+
+  deleteReport(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
 }

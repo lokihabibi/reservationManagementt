@@ -152,18 +152,6 @@ public class ReservationService {
         return reservation;
     }
 
-    
-  /*  public Reservation updateReservationStatus(Integer id, String status) {
-        if (!isValidStatus(status)) {
-            throw new IllegalArgumentException("Invalid status: " + status);
-        }
-        Reservation reservation = reservationRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Reservation not found with id: " + id));
-        if ("cancelled".equals(status) && !"pending".equalsIgnoreCase(reservation.getStatus())) {
-            throw new IllegalStateException("Only pending reservations can be cancelled");
-        }
-        reservation.setStatus(status);
-        return reservationRepository.save(reservation);
-    }*/
 
     private boolean isValidStatus(String status) {
         return status != null && List.of("pending", "approved", "rejected", "cancelled", "completed").contains(status);

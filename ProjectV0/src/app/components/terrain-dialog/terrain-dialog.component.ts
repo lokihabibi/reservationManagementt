@@ -62,13 +62,19 @@ export class TerrainDialogComponent {
   onSubmit(): void {
     if (this.terrainForm.valid) {
       const terrainData = {
-        ...this.terrainForm.value,
-        id_terrain: this.data.terrain?.id_terrain
+        name: this.terrainForm.value.name,
+        location: this.terrainForm.value.location,
+        prix_heur: this.terrainForm.value.prix_heur,
+        desc_terrain: this.terrainForm.value.desc_terrain,
+        image_terrain: this.terrainForm.value.image_terrain,
+        availability: this.terrainForm.value.availability,
+        managerId: this.terrainForm.value.managerId,
+        id_terrain: this.data.terrain?.id_terrain // Add the ID if it exists
       };
+  
       this.dialogRef.close(terrainData);
     }
   }
-
   onCancel(): void {
     this.dialogRef.close();
   }

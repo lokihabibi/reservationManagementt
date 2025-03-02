@@ -45,9 +45,16 @@ export class UserDialogComponent {
   onSubmit(): void {
     if (this.userForm.valid) {
       const userData = {
-        ...this.userForm.value,
+        prenomUser: this.userForm.value.prenomUser.trim(), // Trim whitespace
+        nomUser: this.userForm.value.nomUser.trim(),
+        emailUser: this.userForm.value.emailUser.toLowerCase(), // Convert email to lowercase
+        adresseUser: this.userForm.value.adresseUser,
+        telUser: this.userForm.value.telUser.replace(/\D/g, ''), // Remove non-numeric characters
+        passwordUser: this.userForm.value.passwordUser,
+        role: this.userForm.value.role,
         idUser: this.data.user?.idUser
       };
+  
       this.dialogRef.close(userData);
     }
   }

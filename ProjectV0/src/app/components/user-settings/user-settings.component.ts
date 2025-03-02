@@ -94,16 +94,12 @@ export class UserSettingsComponent implements OnInit {
         console.log('Update response:', response); // Debug log
         this.successMessage = 'User information updated successfully';
         this.user = response;
-        setTimeout(() => {
-          this.successMessage = '';
-        }, 3000);
+    
       },
       (error) => {
         console.error('Error saving user information:', error);
         this.errorMessage = 'Failed to update user information. Please try again.';
-        setTimeout(() => {
-          this.errorMessage = '';
-        }, 3000);
+       
       }
     );
   }

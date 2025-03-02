@@ -16,9 +16,11 @@
             formControlName="prenomUser"
             [class.error]="signupForm.get('prenomUser')?.invalid && signupForm.get('prenomUser')?.touched"
           >
-          <span class="error-message" *ngIf="signupForm.get('prenomUser')?.invalid && signupForm.get('prenomUser')?.touched">
-            {{ getErrorMessage('prenomUser') }}
-          </span>
+          @if (signupForm.get('prenomUser')?.invalid && signupForm.get('prenomUser')?.touched) {
+            <span class="error-message">
+              {{ getErrorMessage('prenomUser') }}
+            </span>
+          }
         </div>
 
         <div class="form-group">
@@ -32,9 +34,11 @@
             formControlName="nomUser"
             [class.error]="signupForm.get('nomUser')?.invalid && signupForm.get('nomUser')?.touched"
           >
-          <span class="error-message" *ngIf="signupForm.get('nomUser')?.invalid && signupForm.get('nomUser')?.touched">
-            {{ getErrorMessage('nomUser') }}
-          </span>
+          @if (signupForm.get('nomUser')?.invalid && signupForm.get('nomUser')?.touched) {
+            <span class="error-message">
+              {{ getErrorMessage('nomUser') }}
+            </span>
+          }
         </div>
       </div>
 
@@ -49,9 +53,11 @@
           formControlName="emailUser"
           [class.error]="signupForm.get('emailUser')?.invalid && signupForm.get('emailUser')?.touched"
         >
-        <span class="error-message" *ngIf="signupForm.get('emailUser')?.invalid && signupForm.get('emailUser')?.touched">
-          {{ getErrorMessage('emailUser') }}
-        </span>
+        @if (signupForm.get('emailUser')?.invalid && signupForm.get('emailUser')?.touched) {
+          <span class="error-message">
+            {{ getErrorMessage('emailUser') }}
+          </span>
+        }
       </div>
 
       <div class="form-group">
@@ -65,9 +71,11 @@
           formControlName="adresseUser"
           [class.error]="signupForm.get('adresseUser')?.invalid && signupForm.get('adresseUser')?.touched"
         >
-        <span class="error-message" *ngIf="signupForm.get('adresseUser')?.invalid && signupForm.get('adresseUser')?.touched">
-          {{ getErrorMessage('adresseUser') }}
-        </span>
+        @if (signupForm.get('adresseUser')?.invalid && signupForm.get('adresseUser')?.touched) {
+          <span class="error-message">
+            {{ getErrorMessage('adresseUser') }}
+          </span>
+        }
       </div>
 
       <div class="form-group">
@@ -81,9 +89,11 @@
           formControlName="telUser"
           [class.error]="signupForm.get('telUser')?.invalid && signupForm.get('telUser')?.touched"
         >
-        <span class="error-message" *ngIf="signupForm.get('telUser')?.invalid && signupForm.get('telUser')?.touched">
-          {{ getErrorMessage('telUser') }}
-        </span>
+        @if (signupForm.get('telUser')?.invalid && signupForm.get('telUser')?.touched) {
+          <span class="error-message">
+            {{ getErrorMessage('telUser') }}
+          </span>
+        }
       </div>
 
       <div class="form-group">
@@ -102,17 +112,23 @@
             <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
           </button>
         </div>
-        <span class="error-message" *ngIf="signupForm.get('passwordUser')?.invalid && signupForm.get('passwordUser')?.touched">
-          {{ getErrorMessage('passwordUser') }}
-        </span>
+        @if (signupForm.get('passwordUser')?.invalid && signupForm.get('passwordUser')?.touched) {
+          <span class="error-message">
+            {{ getErrorMessage('passwordUser') }}
+          </span>
+        }
       </div>
 
       <button type="submit" class="signup-button" [disabled]="signupForm.invalid || isLoading">
-        <span *ngIf="!isLoading">Create Account</span>
-        <span *ngIf="isLoading">
-          <i class="fas fa-spinner fa-spin"></i>
-          Creating account...
-        </span>
+        @if (!isLoading) {
+          <span>Create Account</span>
+        }
+        @if (isLoading) {
+          <span>
+            <i class="fas fa-spinner fa-spin"></i>
+            Creating account...
+          </span>
+        }
       </button>
 
       <p class="login-link">

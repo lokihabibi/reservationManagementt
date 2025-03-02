@@ -17,9 +17,12 @@ import { UserService } from '../../../services/user.service';
 import { TerrainService } from '../../../services/terrain.service';
 import { EquipmentService } from '../../../services/equipment.service';
 import { UserDialogComponent } from '../../user-dialog/user-dialog.component';
-import { TerrainDialogComponent } from '../../terrain-dialog/terrain-dialog.component';
-import { EquipmentDialogComponent } from '../../../components/equipment-dialog/equipment-dialog.component';
 import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { EquipementComponent } from '../../equipement/equipement.component';
+import { TerrainComponent } from '../../terrain/terrain.component';
+import { TerrainDialogComponent } from '../../terrain-dialog/terrain-dialog.component';
+import { EquipmentDialogComponent } from '../../equipement-dialog/equipement-dialog.component';
+import { AdminReportsComponent } from "../../admin-reports/admin-reports.component";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -35,8 +38,9 @@ import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.comp
     MatFormFieldModule,
     MatTabsModule,
     MatCardModule,
-    MatTooltipModule
-  ]
+    MatTooltipModule,
+    AdminReportsComponent
+]
 })
 export class AdminDashboardComponent implements OnInit {
   users: User[] = [];

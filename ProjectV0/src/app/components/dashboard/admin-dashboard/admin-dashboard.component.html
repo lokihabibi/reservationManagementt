@@ -4,6 +4,7 @@
   </div>
 
   <mat-tab-group class="tab-group" animationDuration="0ms" (selectedTabChange)="onTabChange($event)">
+    <!-- Users Tab -->
     <mat-tab label="Users">
       <div class="tab-content">
         <div class="action-bar">
@@ -56,6 +57,7 @@
       </div>
     </mat-tab>
 
+    <!-- Terrains Tab -->
     <mat-tab label="Terrains">
       <div class="tab-content">
         <div class="action-bar">
@@ -71,45 +73,48 @@
         </div>
 
         <div class="item-grid">
-          <mat-card *ngFor="let terrain of filteredTerrains" class="item-card">
-            <mat-card-header>
-              <div mat-card-avatar class="item-avatar">
-                <mat-icon>sports</mat-icon>
-              </div>
-              <mat-card-title>{{terrain.name}}</mat-card-title>
-              <mat-card-subtitle>{{terrain.location}}</mat-card-subtitle>
-            </mat-card-header>
-            
-            <div class="image-container">
-              <img mat-card-image [src]="terrain.image_terrain || 'assets/default-terrain.jpg'" [alt]="terrain.name">
-            </div>
-            
-            <mat-card-content>
-              <div class="item-details">
-                <div class="price-container">
-                  <p class="price"><strong>{{terrain.prix_heur}} DT</strong></p>
-                  <p class="price-label">per hour</p>
+          @for (terrain of filteredTerrains; track terrain.id_terrain) {
+            <mat-card class="item-card">
+              <mat-card-header>
+                <div mat-card-avatar class="item-avatar">
+                  <mat-icon>sports</mat-icon>
                 </div>
-                <span [class]="'status-badge ' + (terrain.availability === 'available' ? 'status-available' : 'status-unavailable')">
-                  {{terrain.availability === 'available' ? 'Available' : 'Unavailable'}}
-                </span>
+                <mat-card-title>{{terrain.name}}</mat-card-title>
+                <mat-card-subtitle>{{terrain.location}}</mat-card-subtitle>
+              </mat-card-header>
+              
+              <div class="image-container">
+                <img mat-card-image [src]="terrain.image_terrain || 'assets/default-terrain.jpg'" [alt]="terrain.name">
               </div>
-              <p class="description">{{terrain.desc_terrain || 'No description available'}}</p>
-            </mat-card-content>
-            
-            <mat-card-actions align="end">
-              <button mat-icon-button color="primary" (click)="openTerrainDialog(terrain)" matTooltip="Edit">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="warn" (click)="deleteTerrain(terrain)" matTooltip="Delete">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+              
+              <mat-card-content>
+                <div class="item-details">
+                  <div class="price-container">
+                    <p class="price"><strong>{{terrain.prix_heur}} DT</strong></p>
+                    <p class="price-label">per hour</p>
+                  </div>
+                  <span [class]="'status-badge ' + (terrain.availability === 'available' ? 'status-available' : 'status-unavailable')">
+                    {{terrain.availability === 'available' ? 'Available' : 'Unavailable'}}
+                  </span>
+                </div>
+                <p class="description">{{terrain.desc_terrain || 'No description available'}}</p>
+              </mat-card-content>
+              
+              <mat-card-actions align="end">
+                <button mat-icon-button color="primary" (click)="openTerrainDialog(terrain)" matTooltip="Edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteTerrain(terrain)" matTooltip="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          }
         </div>
       </div>
     </mat-tab>
 
+    <!-- Equipment Tab -->
     <mat-tab label="Equipment">
       <div class="tab-content">
         <div class="action-bar">
@@ -125,42 +130,51 @@
         </div>
 
         <div class="item-grid">
-          <mat-card *ngFor="let equipment of filteredEquipments" class="item-card">
-            <mat-card-header>
-              <div mat-card-avatar class="item-avatar">
-                <mat-icon>fitness_center</mat-icon>
-              </div>
-              <mat-card-title>{{equipment.nom_equipment}}</mat-card-title>
-              <mat-card-subtitle>Location: Main Storage</mat-card-subtitle>
-            </mat-card-header>
-
-            <div class="image-container">
-              <img mat-card-image [src]="equipment.image_equip || 'assets/default-equipment.jpg'" [alt]="equipment.nom_equipment">
-            </div>
-
-            <mat-card-content>
-              <div class="item-details">
-                <div class="price-container">
-                  <p class="price"><strong>{{equipment.prix}} DT</strong></p>
-                  <p class="price-label">per day</p>
+          @for (equipment of filteredEquipments; track equipment.id_equipment) {
+            <mat-card class="item-card">
+              <mat-card-header>
+                <div mat-card-avatar class="item-avatar">
+                  <mat-icon>fitness_center</mat-icon>
                 </div>
-                <span [class]="'status-badge ' + (equipment.availability === 'available' ? 'status-available' : 'status-unavailable')">
-                  {{equipment.availability === 'available' ? 'Available' : 'Unavailable'}}
-                </span>
-              </div>
-              <p class="description">{{equipment.desc_equipment || 'No description available'}}</p>
-            </mat-card-content>
+                <mat-card-title>{{equipment.nom_equipment}}</mat-card-title>
+                <mat-card-subtitle>Location: Main Storage</mat-card-subtitle>
+              </mat-card-header>
 
-            <mat-card-actions align="end">
-              <button mat-icon-button color="primary" (click)="openEquipmentDialog(equipment)" matTooltip="Edit">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="warn" (click)="deleteEquipment(equipment)" matTooltip="Delete">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-card-actions>
-          </mat-card>
+              <div class="image-container">
+                <img mat-card-image [src]="equipment.image_equip || 'assets/default-equipment.jpg'" [alt]="equipment.nom_equipment">
+              </div>
+
+              <mat-card-content>
+                <div class="item-details">
+                  <div class="price-container">
+                    <p class="price"><strong>{{equipment.prix}} DT</strong></p>
+                    <p class="price-label">per day</p>
+                  </div>
+                  <span [class]="'status-badge ' + (equipment.availability === 'available' ? 'status-available' : 'status-unavailable')">
+                    {{equipment.availability === 'available' ? 'Available' : 'Unavailable'}}
+                  </span>
+                </div>
+                <p class="description">{{equipment.desc_equipment || 'No description available'}}</p>
+              </mat-card-content>
+
+              <mat-card-actions align="end">
+                <button mat-icon-button color="primary" (click)="openEquipmentDialog(equipment)" matTooltip="Edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteEquipment(equipment)" matTooltip="Delete">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          }
         </div>
+      </div>
+    </mat-tab>
+
+    <!-- Reports Tab -->
+    <mat-tab label="Reports">
+      <div class="tab-content">
+        <app-admin-reports></app-admin-reports>
       </div>
     </mat-tab>
   </mat-tab-group>

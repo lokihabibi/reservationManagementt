@@ -26,14 +26,10 @@ public class Client {
     private Long idClient;
 	
 	
-	
-	
     @OneToOne
     @MapsId  
     @JoinColumn(name = "idClient", referencedColumnName = "id_user") // Foreign key reference
     private User user;
-
-
 
 	public Long getIdClient() {
 		return idClient;

@@ -10,15 +10,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "idManager")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Manager {
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idManager")
     private Long idManager;
-    
 
     @OneToOne
-    @MapsId  // Ensures idManager = id_user
-    @JoinColumn(name = "idManager", referencedColumnName = "id_user") // Foreign key reference
+    @MapsId  // Associer idManager avec id_user dans User
+    @JoinColumn(name = "idManager", referencedColumnName = "id_user") // Clé étrangère vers User
     private User user;
 
 

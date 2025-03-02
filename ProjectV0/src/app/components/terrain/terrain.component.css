@@ -1,0 +1,260 @@
+.equipment-section {
+    padding: 80px 0;
+    background-color: var(--background-color, #f3f4f6);
+  }
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color, #1f2937);
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--primary, #4a90e2) 0%, #6ea22f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .section-subtitle {
+    color: var(--text-secondary, #6b7280);
+    font-size: 1.125rem;
+  }
+  
+  .slider-container {
+    position: relative;
+    padding: 0 60px;
+    overflow: hidden;
+  }
+  
+  .equipment-slider {
+    overflow: hidden;
+    margin: 0 -15px;
+  }
+  
+  .slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+  
+  .equipment-card {
+    padding: 15px;
+    flex: 0 0 500px;
+    max-width: 500px;
+  }
+  
+  .card-image {
+    position: relative;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .price-tag {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  
+  .price-tag span {
+    font-size: 0.875rem;
+    opacity: 0.8;
+  }
+  
+  .card-content {
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    margin-top: -20px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary, #1f2937);
+    margin-bottom: 10px;
+  }
+  
+  .card-category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-location i {
+    color: var(--primary, #4a90e2);
+  }
+  
+  .card-description {
+    color: var(--text-secondary, #6b7280);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #ef4444;
+    color: white;
+  }
+  
+  .status-badge.available {
+    background-color: #10b981;
+  }
+  
+  .status-badge.maintenance {
+    background-color: #f59e0b;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+  
+  .primary-button {
+    background-color: var(--primary, #4a90e2);
+    color: white;
+  }
+  
+  .primary-button:hover {
+    background-color: var(--primary-dark, #357abd);
+  }
+  
+  .primary-button:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+  }
+  
+  .secondary-button {
+    background-color: transparent;
+    color: var(--text-primary, #1f2937);
+    border: 1px solid #d1d5db;
+  }
+  
+  .secondary-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  
+  .nav-button.prev {
+    left: 0;
+  }
+  
+  .nav-button.next {
+    right: 0;
+  }
+  
+  .nav-button:hover {
+    background-color: var(--primary, #4a90e2);
+    color: white;
+    border-color: var(--primary, #4a90e2);
+  }
+  
+  .nav-button:disabled {
+    background-color: #f3f4f6;
+    color: #d1d5db;
+    cursor: not-allowed;
+  }
+  
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 1.75rem;
+    }
+    
+    .card-image {
+      height: 200px;
+    }
+    
+    .slider-container {
+      padding: 0 30px;
+    }
+    
+    .equipment-card {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .action-buttons {
+      flex-direction: column;
+    }
+    
+    .slider-container {
+      padding: 0 20px;
+    }
+  }

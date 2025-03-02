@@ -1,0 +1,66 @@
+<section class="equipment-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Discover Our Sports Equipment</h2>
+      <p class="section-subtitle">Find and rent high-quality sports equipment</p>
+    </div>
+
+    <div class="slider-container">
+      <button class="nav-button prev" (click)="slidePrev()" [disabled]="currentIndex === 0">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <div class="equipment-slider">
+        <div class="slider-track" [ngStyle]="{ 'transform': 'translateX(' + (-currentIndex * 500) + 'px)' }">
+          @for (equipment of equipments; track equipment.id_equipment) {
+            <div class="equipment-card">
+              <div class="card-image">
+                <img [src]="equipment.image_equip" [alt]="equipment.nom_equipment">
+                <div class="price-tag">{{equipment.prix | number:'1.2-2'}}DT<span>/hour</span></div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">{{equipment.nom_equipment}}</h3>
+                <div class="card-category">
+                  <i class="fas fa-tag"></i>
+                  Sports Equipment
+                </div>
+                <div class="card-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  {{equipment.location || 'Location not specified'}}
+                </div>
+                <p class="card-description">{{equipment.desc_equipment}}</p>
+                <div class="card-footer">
+                  <span class="status-badge" 
+                        [class.available]="equipment.availability === 'available'" 
+                        [class.maintenance]="equipment.availability === 'maintenance'">
+                    @if (equipment.availability === 'available') {
+                      Available
+                    } @else if (equipment.availability === 'maintenance') {
+                      Maintenance
+                    } @else {
+                      Not Available
+                    }
+                  </span>
+                  <div class="action-buttons">
+                    <button class="primary-button" 
+                            (click)="openReservationForm(equipment)" 
+                            [disabled]="equipment.availability !== 'available'">
+                      <i class="fas fa-calendar-plus"></i> Reserve
+                    </button>
+                    <button class="secondary-button" (click)="openRapportDialog(equipment)">
+                      <i class="fas fa-flag"></i> Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <button class="nav-button next" (click)="slideNext()" [disabled]="currentIndex >= maxIndex">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>

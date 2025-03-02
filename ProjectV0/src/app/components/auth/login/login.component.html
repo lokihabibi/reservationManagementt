@@ -19,10 +19,16 @@
           placeholder="Enter your email"
           [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
         />
-        <div class="error-message" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          <span *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</span>
-          <span *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid email</span>
-        </div>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          <div class="error-message">
+            @if (loginForm.get('email')?.errors?.['required']) {
+              <span>Email is required</span>
+            }
+            @if (loginForm.get('email')?.errors?.['email']) {
+              <span>Please enter a valid email</span>
+            }
+          </div>
+        }
       </div>
 
       <div class="form-group">
@@ -43,9 +49,11 @@
             <i class="fas" [class.fa-eye]="!showPassword" [class.fa-eye-slash]="showPassword"></i>
           </button>
         </div>
-        <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          Password is required
-        </div>
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          <div class="error-message">
+            Password is required
+          </div>
+        }
       </div>
 
       <div class="form-options">
@@ -61,17 +69,23 @@
       </div>
 
       <!-- Error Message -->
-      <div *ngIf="error" class="alert alert-danger mt-3">
-        {{ error }}
-      </div>
+      @if (error) {
+        <div class="alert alert-danger mt-3">
+          {{ error }}
+        </div>
+      }
 
       <button
         type="submit"
         class="login-button"
         [disabled]="loginForm.invalid || isLoading"
       >
-        <span *ngIf="!isLoading">Login</span>
-        <span *ngIf="isLoading" class="loading-spinner"></span>
+        @if (!isLoading) {
+          <span>Login</span>
+        }
+        @if (isLoading) {
+          <span class="loading-spinner"></span>
+        }
       </button>
 
       <div class="signup-link">

@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
-import { HeroComponent } from './components/hero/hero.component';
 import { HowItWorksComponent } from './components/how-it-works/how-it-works.component';
-import { TerrainSectionComponent } from './components/terrain-section/terrain-section.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { EquipmentComponent } from './components/equipment/equipment.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { AdminDashboardComponent } from './components/dashboard/admin-dashboard/admin-dashboard.component';
 import { ManagerDashboardComponent } from './components/dashboard/manager-dashboard/manager-dashboard.component';
@@ -15,6 +12,10 @@ import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { MyReservationsComponent } from './components/my-reservations/my-reservations.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { TerrainComponent } from './components/terrain/terrain.component';
+import { AdminReportsComponent } from './components/admin-reports/admin-reports.component';
+import { AcceuilComponent } from './components/acceuil/acceuil.component';
 
 // Role guard function
 const roleGuard = (allowedRole: string) => {
@@ -39,7 +40,7 @@ export const routes: Routes = [
   // Public routes - accessible to everyone
   {
     path: '',
-    component: HeroComponent
+    component: AcceuilComponent
   },
   {
     path: 'how-it-works',
@@ -47,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'terrain',
-    component: TerrainSectionComponent
+    component: TerrainComponent
   },
   {
     path: 'login',
@@ -61,8 +62,13 @@ export const routes: Routes = [
   // Protected routes - require authentication
   {
     path: 'equipment',
-    component: EquipmentComponent
+    component: EquipementComponent
   },
+  {
+    path: 'rapports',
+    component: AdminReportsComponent
+  },
+  
   {
     path: 'settings',
     component: UserSettingsComponent,
@@ -96,7 +102,7 @@ export const routes: Routes = [
       },
       {
         path: 'terrain',
-        component: TerrainSectionComponent
+        component: TerrainComponent
       }
     ]
   },
